@@ -1,13 +1,24 @@
 #!/bin/sh
 set -e
 
+requirements_txt=$1
+
+if [ $"requirements_txt" = - ]; then
+    requirements_txt=/dev/stdin
+fi
+
+if ! [ -r "$requirements_txt" ]; then
+    echo >&2 "Usage: $0 path/to/requirements.txt"
+    exit 1
+fi
+
 mkdir -p wheelfreeze
 
 if [ -f wheelfreeze/requirements.freeze ]; then
     mv wheelfreeze/requirements.freeze wheelfreeze/requirements.freeze.old
 fi
 rm -rf wheelfreeze/wheels
-pip wheel --wheel-dir=wheelfreeze/wheels -r requirements.txt
+pip wheel --wheel-dir=wheelfreeze/wheels -r "$requirements_txt"
 for whl in wheelfreeze/wheels/*.whl; do
     unzip -p "$whl" '*.dist-info/metadata.json' | jq -r '.name + "==" + .version' >> wheelfreeze/requirements.freeze
 done

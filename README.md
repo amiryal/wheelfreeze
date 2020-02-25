@@ -27,8 +27,7 @@ source host, and re-use them on the destination.
 
 ## How it works
 
-Running `wheelfreeze` in a directory with the above `requirements.txt` will
-create the following tree:
+Running `wheelfreeze requirements.txt` will create the following tree:
 
 ```
 wheelfreeze/
