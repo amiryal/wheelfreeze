@@ -32,7 +32,6 @@ Running `wheelfreeze requirements.txt` will create the following tree:
 ```
 wheelfreeze/
 ├── install*
-├── requirements.freeze
 └── wheels/
     ├── somedependency-1.3-py2.py3-none-any.whl
     └── somepackage-0.1.dev1234-py3-none-any.whl
@@ -45,6 +44,6 @@ without activating interactively.
 
 ## Requirements
 
-For creating the archive: `pip`, `unzip`, `jq`.
+For creating the archive: `pip`.
 
 For installing from the archive: `python3`, `pip`.
