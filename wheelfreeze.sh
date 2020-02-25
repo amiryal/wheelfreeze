@@ -20,17 +20,19 @@ pip wheel --wheel-dir=wheelfreeze/wheels -r "$requirements_txt"
 cat > wheelfreeze/install <<'INSTALL'
 #!/bin/sh
 set -e
-wheelfreeze_base="$(readlink -f "$(dirname "$0")")"
-rm -rf "$wheelfreeze_base"/venv
-python3 -m venv "$wheelfreeze_base"/venv
-. "$wheelfreeze_base"/venv/bin/activate
-pip install --no-deps "$wheelfreeze_base"/wheels/*.whl
 
-cat > "$wheelfreeze_base"/venv/bin/run <<END
-#!/bin/sh
-. "$wheelfreeze_base"/venv/bin/activate
-exec "\$@"
-END
-chmod +x "$wheelfreeze_base"/venv/bin/run
+virtual_env=$1
+virtual_env=$(realpath -s "$virtual_env" ||:)
+
+if ! [ -f "$virtual_env"/bin/activate ]; then
+    echo >&2 "Usage: $0 path/to/venv"
+    exit 1
+fi
+
+. "$virtual_env"/bin/activate
+
+wheelfreeze_base="$(realpath -s "$(dirname "$0")")"
+
+pip install --no-deps "$wheelfreeze_base"/wheels/*.whl
 INSTALL
 chmod +x wheelfreeze/install

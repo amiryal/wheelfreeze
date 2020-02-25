@@ -37,13 +37,9 @@ wheelfreeze/
     └── somepackage-0.1.dev1234-py3-none-any.whl
 ```
 
-Running the generated `wheelfreeze/install` script will populate a standard
-virtualenv in `wheelfreeze/venv`, and add a convenience script,
-`wheelfreeze/venv/bin/run`, for running other programs inside the virtualenv
-without activating interactively.
+Running `wheelfreeze/install path/to/venv` script will install the wheels in the
+virtualenv at `path/to/venv`.
 
 ## Requirements
 
-For creating the archive: `pip`.
-
-For installing from the archive: `python3`, `pip`.
+A POSIX environment with `realpath` from GNU Coreutils and `pip` from Python.
