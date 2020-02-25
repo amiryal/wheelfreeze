@@ -8,14 +8,16 @@ if [ $"requirements_txt" = - ]; then
 fi
 
 if ! [ -r "$requirements_txt" ]; then
-    echo >&2 "Usage: $0 path/to/requirements.txt"
+    echo >&2 "Usage: $0 path/to/requirements.txt [arguments to pip wheel]…"
     exit 1
 fi
+
+shift
 
 mkdir -p wheelfreeze
 
 rm -rf wheelfreeze/wheels
-pip wheel --wheel-dir=wheelfreeze/wheels -r "$requirements_txt"
+pip wheel --wheel-dir=wheelfreeze/wheels "$@" -r "$requirements_txt"
 
 cat > wheelfreeze/install <<'INSTALL'
 #!/bin/sh
