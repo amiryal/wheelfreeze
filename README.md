@@ -37,7 +37,7 @@ wheelfreeze/
     └── somepackage-0.1.dev1234-py3-none-any.whl
 ```
 
-Running `wheelfreeze/install path/to/venv` script will install the wheels in the
+Running `wheelfreeze/install path/to/venv` will install the wheels in the
 virtualenv at `path/to/venv`.
 
 ## Requirements
