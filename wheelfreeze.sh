@@ -18,6 +18,11 @@ mkdir -p wheelfreeze
 
 rm -rf wheelfreeze/wheels
 pip wheel --wheel-dir=wheelfreeze/wheels "$@" -r "$requirements_txt"
+python <<END > wheelfreeze/sys_executable_hint
+import sys
+from os.path import basename, realpath
+print(basename(realpath(sys.executable)))
+END
 
 cat > wheelfreeze/install <<'INSTALL'
 #!/bin/sh

@@ -32,6 +32,7 @@ Running `wheelfreeze requirements.txt` will create the following tree:
 ```
 wheelfreeze/
 ├── install*
+├── sys_executable_hint
 └── wheels/
     ├── somedependency-1.3-py2.py3-none-any.whl
     └── somepackage-0.1.dev1234-py3-none-any.whl
@@ -39,6 +40,10 @@ wheelfreeze/
 
 Running `wheelfreeze/install path/to/venv` will install the wheels in the
 virtualenv at `path/to/venv`.
+
+A best-effort attempt is made to detect the Python executable that was used in
+creating the wheels, and its path is written to
+`wheelfreeze/sys_executable_hint`.
 
 ## Requirements
 
