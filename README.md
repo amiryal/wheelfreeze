@@ -43,3 +43,17 @@ virtualenv at `path/to/venv`.
 ## Requirements
 
 A POSIX environment with `realpath` from GNU Coreutils and `pip` from Python.
+
+## Installation
+
+Varies by OS and setup, but generally for a normal user:
+
+```
+make install PREFIX=~/.local
+```
+
+Or system wide:
+
+```
+sudo make install
+```
